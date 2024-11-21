@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-landing-page
+  namespace: nginx-app
+  labels:
+    app: nginx-landing-page
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-landing-page
+  template:
+    metadata:
+      labels:
+        app: nginx-landing-page
+    spec:
+      serviceAccount: nginx-sa
+      serviceAccountName: nginx-sa
+      containers:
+        - name: nginx
+          image: harbor.src.si/dockerhub-proxy-auth/library/nginx:stable
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: landing-page
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: landing-page
+          configMap:
+            name: nginx-landing-page
