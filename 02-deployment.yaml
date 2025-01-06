@@ -11,9 +11,9 @@ spec:
     matchLabels:
       app: nginx-landing-page
   template:
-    annotations:
-        sidecar.istio.io/inject: "true"
     metadata:
+      annotations:
+          sidecar.istio.io/inject: "true"
       labels:
         app: nginx-landing-page
     spec:
