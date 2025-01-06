@@ -15,6 +15,7 @@ spec:
       annotations:
           sidecar.istio.io/inject: "true"
       labels:
+        sidecar.istio.io/inject: "true"
         app: nginx-landing-page
     spec:
       serviceAccount: nginx-sa
